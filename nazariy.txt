@@ -1,0 +1,118 @@
+
+
+EXERCISE 1
+In SQL, JOINs are employed to combine rows from multiple tables by using a common column between them.
+Here are some examples of SQL;
+1)INNER JOIN-It gives us only the rows where the values match in both tables.
+
+
+ SELECT orders.student_id, students.student_name
+ FROM orders
+ INNER JOIN students ON orders.student_id = students.student_id;
+2)LEFT JOIN- Retrieves all rows from the left table along with any matching rows from the right table. If there's no match, the right table columns display NULL values.
+
+
+
+SELECT students.students_name, orders.order_id
+FROM students
+LEFT JOIN orders ON students.student_id = orders.student_id;
+
+3)RIGHT JOIN- Retrieves all rows from the right table along with any matching rows from the right table. If there's no match, the right table columns display NULL values.
+
+SELECT students.students_name, orders.order_id
+FROM students
+RIGHT JOIN orders ON students.student_id = orders.student_id;
+
+EXERCISE 2
+In SQL, we use the ALTER TABLE statement to change how a table is set up.
+
+ADD COLUMN
+ALTER TABLE students
+ADD name VARCHAR(255);
+
+MODIFY
+To change how a column is defined in a table, we use the ALTER TABLE statement along with the MODIFY COLUMN clause.
+
+ALTER TABLE students
+MODIFY COLUMN tuition-fee DECIMAL(7,2);
+
+DROPPING
+To delete a column from a table, we employ the ALTER TABLE statement alongside the DROP COLUMN clause.
+
+ALTER TABLE students
+DROP COLUMN name;
+
+EXERCISE 3
+Foreign keys in a database table point to the primary key in another table, creating a link between the two tables, which is called a parent-child relationship.
+This link helps ensure data consistency, known as referential integrity.
+
+CREATE TABLE author (
+    author_id INT PRIMARY KEY,
+    author_name VARCHAR(50)
+);
+
+CREATE TABLE books (
+    book_id INT PRIMARY KEY,
+    book_name VARCHAR (50),
+    author_id INT,
+    FOREIGN KEY (author_id) REFERENCES author (author_id)
+);
+
+EXERCISE 4
+Model-View-Template, which is a design pattern used in Django web development.
+
+The MVT pattern in Django works like this: Models define the data structure.
+Views handle the logic and data processing.
+Templates generate the HTML pages that users see in their browsers.
+
+EXERCISE 6
+Analytical Questions:
+- Find the most borrowed book in the last 6 months. (10 ball)
+
+SELECT books.title, COUNT(*) FROM borrowingrecords INNER JOIN books ON
+ borrowingrecords.book_id=books.book_id WHERE borrowingrecords.borrow_date
+ BETWEEN '2024-01-01' and '2024-06-06' GROUP BY borrowingrecords.book_id, books.book_id
+ ORDER BY count DESC LIMIT 1;
+
+
+              title               | count
+-----------------------------------+-------
+ Former more station here point.   |     6
+
+
+
+- Find the member who has borrowed the most books. (10 ball)
+
+SELECT members.name, COUNT(*) FROM borrowingrecords INNER JOIN members ON
+borrowingrecords.member_id=members.member_id GROUP BY borrowingrecords.member_id,
+members.member_id ORDER BY count DESC LIMIT 5;
+
+
+      name       | count
+-----------------+-------
+ Timothy Olsen   |    19
+ Rebecca Osborne |    19
+ Krystal Montoya |    18
+ Denise Salas    |    18
+ Leslie Carr     |    18
+(5 rows)
+
+
+
+- Find the average borrowing duration for books. (10 ball)
+
+SELECT AVG(return_date-borrow_date) FROM borrowingrecords WHERE return_date IS NOT NULL;
+
+
+         avg
+----------------------
+ 366.1310344827586207
+(1 row)
+
+
+EXERCISE 7 (diagram)
+https://www.figma.com/board/fdNSpOK6rspFu10Gkj8OYK/Untitled?node-id=0-1&t=BGjRRqEjnVJzd1Dh-1
+
+
+
+

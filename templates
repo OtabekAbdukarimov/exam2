@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kitoblar Ro'yxati</title>
+</head>
+<body>
+    <h1>Kitoblar Ro'yxati</h1>
+    <table border="1">
+        <tr>
+            <th>Kitob nomi</th>
+            <th>Muallif</th>
+            <th>ijaraga oluvchi</th>
+        </tr>
+        {% for book in book_details %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.borrower }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
